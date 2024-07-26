@@ -1,0 +1,12 @@
+.round-scoring {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.round-scoring-column {
+    display: grid;
+}
+
+.round-scoring-column-header {
+    font-weight: bold;
+}
