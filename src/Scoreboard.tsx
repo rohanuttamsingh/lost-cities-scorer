@@ -1,4 +1,13 @@
-export default function Scoreboard() {
+type ScoreboardProps = {
+  scores: number[][];
+};
+
+export default function Scoreboard({ scores }: ScoreboardProps) {
+  const totalScores = scores.reduce(
+    (acc, roundScores) => [acc[0] + roundScores[0], acc[1] + roundScores[1]],
+    [0, 0]
+  );
+
   return (
     <>
       <table>
@@ -10,25 +19,17 @@ export default function Scoreboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
+          {scores.map((roundScores, round) => (
+            <tr key={round}>
+              <td>{round + 1}</td>
+              <td>{roundScores[0]}</td>
+              <td>{roundScores[1]}</td>
+            </tr>
+          ))}
           <tr>
             <td>Total</td>
-            <td>0</td>
-            <td>0</td>
+            <td>{totalScores[0]}</td>
+            <td>{totalScores[1]}</td>
           </tr>
         </tbody>
       </table>

@@ -7,21 +7,17 @@ type Card = {
 };
 
 type CityProps = {
+  round: number;
   color: string;
   updateScores: (scoreDiff: number) => void;
 };
 
-export default function City({ color, updateScores }: CityProps) {
+export default function City({ round, color, updateScores }: CityProps) {
   const [numHandshakes, setNumHandshakes] = useState(0);
-  const [cards, setCards] = useState<Card[]>(
-    [...Array(9).keys()].map((value) => ({
-      value: value + 2,
-      played: false,
-    }))
-  );
+  const [cards, setCards] = useState<Card[]>([]);
   const [score, setScore] = useState(0);
 
-  const handleIncrementHandshakes = () => {
+  const incrementHandshakes = () => {
     setNumHandshakes(numHandshakes >= 3 ? 0 : numHandshakes + 1);
   };
 
@@ -32,6 +28,21 @@ export default function City({ color, updateScores }: CityProps) {
       )
     );
   };
+
+  const reset = () => {
+    setNumHandshakes(0);
+    setCards(
+      [...Array(9).keys()].map((value) => ({
+        value: value + 2,
+        played: false,
+      }))
+    );
+    setScore(0);
+  };
+
+  useEffect(() => {
+    reset();
+  }, [round]);
 
   useEffect(() => {
     let newScore = 0;
@@ -53,7 +64,7 @@ export default function City({ color, updateScores }: CityProps) {
   return (
     <div className="city">
       <div className="city-color">{color}</div>
-      <button onClick={handleIncrementHandshakes}>
+      <button onClick={incrementHandshakes}>
         {numHandshakes === 0 ? "_" : "H".repeat(numHandshakes)}
       </button>
       {cards.map((card, index) => (
