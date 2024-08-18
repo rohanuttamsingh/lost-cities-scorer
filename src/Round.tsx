@@ -30,7 +30,7 @@ export default function Round({ colors }: RoundProps) {
           <City
             key={color}
             color={color}
-            updateScore={(scoreDiff: number) => updateScores(0, scoreDiff)}
+            updateScores={(scoreDiff: number) => updateScores(0, scoreDiff)}
           />
         ))}
       </div>
@@ -43,7 +43,7 @@ export default function Round({ colors }: RoundProps) {
           <City
             key={color}
             color={color}
-            updateScore={(scoreDiff: number) => updateScores(1, scoreDiff)}
+            updateScores={(scoreDiff: number) => updateScores(1, scoreDiff)}
           />
         ))}
       </div>
