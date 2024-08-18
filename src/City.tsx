@@ -8,9 +8,10 @@ type Card = {
 
 type CityProps = {
   color: string;
+  updateScore: (scoreDiff: number) => void;
 };
 
-export default function City({ color }: CityProps) {
+export default function City({ color, updateScore }: CityProps) {
   const [numHandshakes, setNumHandshakes] = useState(0);
   const [cards, setCards] = useState<Card[]>(
     [...Array(9).keys()].map((value) => ({
@@ -44,7 +45,8 @@ export default function City({ color }: CityProps) {
       newScore = (total - 20) * (numHandshakes + 1) + (numPlayed >= 8 ? 20 : 0);
     }
     setScore(newScore);
-  }, [cards, numHandshakes]);
+    updateScore(newScore - score);
+  }, [cards, numHandshakes, score, updateScore]);
 
   return (
     <div className="city">
