@@ -44,8 +44,10 @@ export default function City({ color, updateScore }: CityProps) {
       );
       newScore = (total - 20) * (numHandshakes + 1) + (numPlayed >= 8 ? 20 : 0);
     }
-    setScore(newScore);
-    updateScore(newScore - score);
+    if (newScore !== score) {
+      setScore(newScore);
+      updateScore(newScore - score);
+    }
   }, [cards, numHandshakes, score, updateScore]);
 
   return (
