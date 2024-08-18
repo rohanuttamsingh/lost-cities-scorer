@@ -1,5 +1,19 @@
+.player-heading {
+    font-weight: bold;
+}
+
 .round-table {
     display: grid;
     grid-auto-flow: column;
+    column-gap: 1em;
+}
+
+.not-player-turn {
+    display: none;
+}
+
+.player-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     column-gap: 1em;
 }
