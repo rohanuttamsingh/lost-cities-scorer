@@ -40,9 +40,7 @@ export default function City({ round, color, updateScores }: CityProps) {
     setScore(0);
   };
 
-  useEffect(() => {
-    reset();
-  }, [round]);
+  useEffect(reset, [round]);
 
   useEffect(() => {
     let newScore = 0;
