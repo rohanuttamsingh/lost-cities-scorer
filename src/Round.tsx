@@ -1,3 +1,4 @@
+import City from "./City";
 import "./Round.css";
 
 type RoundProps = {
@@ -9,13 +10,7 @@ export default function Round({ colors }: RoundProps) {
     <>
       <div className="round-table">
         {colors.map((color) => (
-          <div key={color} className="column">
-            <div className="column-header">{color}</div>
-            <div>H</div>
-            {[...Array(9).keys()].map((num) => (
-              <div key={num}>{num + 2}</div>
-            ))}
-          </div>
+          <City key={color} color={color} />
         ))}
       </div>
     </>

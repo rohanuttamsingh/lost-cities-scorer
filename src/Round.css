@@ -1,12 +1,5 @@
 .round-table {
     display: grid;
     grid-auto-flow: column;
-}
-
-.column {
-    display: grid;
-}
-
-.header {
-    font-weight: bold;
+    column-gap: 1em;
 }

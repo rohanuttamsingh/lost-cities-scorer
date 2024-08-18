@@ -1,0 +1,15 @@
+button {
+    margin-bottom: 0.25em;
+}
+
+.city {
+    display: grid;
+}
+
+.city-color {
+    font-weight: bold;
+}
+
+.played {
+    font-weight: bold;
+}
