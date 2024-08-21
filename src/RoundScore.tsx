@@ -4,6 +4,7 @@ import { Player, Round } from "./shared_types";
 import "./RoundScore.css";
 
 type RoundProps = {
+  players: string[];
   round: Round;
   colors: Array<string>;
   setRoundScores: (newRoundScores: number[]) => void;
@@ -11,6 +12,7 @@ type RoundProps = {
 };
 
 export default function RoundScore({
+  players,
   round,
   colors,
   setRoundScores,
@@ -34,7 +36,7 @@ export default function RoundScore({
 
   return (
     <>
-      <div className="player-heading">Player {player + 1}</div>
+      <div className="player-heading">{players[player]}</div>
       <div
         className={`round-table ${
           player === 0 ? "player-turn" : "not-player-turn"
@@ -64,8 +66,12 @@ export default function RoundScore({
         ))}
       </div>
       <div className="player-select">
-        <button onClick={() => setPlayer(0)}>Player 1: {scores[0]}</button>
-        <button onClick={() => setPlayer(1)}>Player 2: {scores[1]}</button>
+        <button onClick={() => setPlayer(0)}>
+          {players[0]}: {scores[0]}
+        </button>
+        <button onClick={() => setPlayer(1)}>
+          {players[1]}: {scores[1]}
+        </button>
       </div>
       <div className="submit">
         <button onClick={submitRound}>Submit Round {round + 1}</button>

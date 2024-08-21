@@ -3,21 +3,25 @@ import RoundScore from "./RoundScore";
 import Scoreboard from "./Scoreboard";
 import { Round } from "./shared_types";
 import "./App.css";
+import Setup from "./Setup";
 
 function App() {
+  const [players, setPlayers] = useState<string[]>([]);
+  const [expanded, setExpanded] = useState(false);
   const [round, setRound] = useState<Round>(0);
   const [scores, setScores] = useState<number[][]>([]);
   const [totalScores, setTotalScores] = useState<number[]>([]);
-  const colors = ["Yellow", "White", "Green", "Blue", "Red"];
+
+  const allColors = ["Yellow", "White", "Green", "Blue", "Red", "Purple"];
+  const colors = expanded ? allColors : allColors.slice(0, -1);
 
   const setRoundScores = (newRoundScores: number[]) => {
-    setScores(
-      scores.map((roundScores, i) =>
-        i === round ? newRoundScores : roundScores
-      )
+    const newScores = scores.map((roundScores, i) =>
+      i === round ? newRoundScores : roundScores
     );
+    setScores(newScores);
     setTotalScores(
-      scores.reduce(
+      newScores.reduce(
         (acc, roundScores) => [
           acc[0] + roundScores[0],
           acc[1] + roundScores[1],
@@ -47,23 +51,36 @@ function App() {
     <>
       <h1>Lost Cities Scorer</h1>
 
-      <Scoreboard scores={scores} totalScores={totalScores} />
-
-      {round <= 2 ? (
-        <RoundScore
-          round={round}
-          colors={colors}
-          setRoundScores={setRoundScores}
-          incrementRound={incrementRound}
-        />
+      {players.length === 0 ? (
+        <Setup setPlayersGlobal={setPlayers} setExpandedGlobal={setExpanded} />
       ) : (
         <>
-          <div>
-            {totalScores[0] === totalScores[1]
-              ? "It's a tie!"
-              : `Player ${totalScores[0] > totalScores[1] ? "1" : "2"} wins`}
-          </div>
-          <button onClick={reset}>Reset</button>
+          <Scoreboard
+            players={players}
+            scores={scores}
+            totalScores={totalScores}
+          />
+
+          {round <= 2 ? (
+            <RoundScore
+              players={players}
+              round={round}
+              colors={colors}
+              setRoundScores={setRoundScores}
+              incrementRound={incrementRound}
+            />
+          ) : (
+            <>
+              <div>
+                {totalScores[0] === totalScores[1]
+                  ? "It's a tie!"
+                  : `${
+                      totalScores[0] > totalScores[1] ? players[0] : players[1]
+                    } wins`}
+              </div>
+              <button onClick={reset}>Reset</button>
+            </>
+          )}
         </>
       )}
     </>

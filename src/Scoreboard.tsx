@@ -1,17 +1,22 @@
 type ScoreboardProps = {
+  players: string[];
   scores: number[][];
   totalScores: number[];
 };
 
-export default function Scoreboard({ scores, totalScores }: ScoreboardProps) {
+export default function Scoreboard({
+  players,
+  scores,
+  totalScores,
+}: ScoreboardProps) {
   return (
     <>
       <table>
         <thead>
           <tr>
             <th>Round</th>
-            <th>Player 1</th>
-            <th>Player 2</th>
+            <th>{players[0]}</th>
+            <th>{players[1]}</th>
           </tr>
         </thead>
         <tbody>
