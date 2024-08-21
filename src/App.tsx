@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import RoundScore from "./RoundScore";
 import Scoreboard from "./Scoreboard";
+import Setup from "./Setup";
 import { Round } from "./shared_types";
 import "./App.css";
-import Setup from "./Setup";
 
 function App() {
   const [players, setPlayers] = useState<string[]>([]);
