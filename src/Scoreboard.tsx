@@ -1,13 +1,9 @@
 type ScoreboardProps = {
   scores: number[][];
+  totalScores: number[];
 };
 
-export default function Scoreboard({ scores }: ScoreboardProps) {
-  const totalScores = scores.reduce(
-    (acc, roundScores) => [acc[0] + roundScores[0], acc[1] + roundScores[1]],
-    [0, 0]
-  );
-
+export default function Scoreboard({ scores, totalScores }: ScoreboardProps) {
   return (
     <>
       <table>

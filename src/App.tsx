@@ -7,12 +7,22 @@ import "./App.css";
 function App() {
   const [round, setRound] = useState<Round>(0);
   const [scores, setScores] = useState<number[][]>([]);
+  const [totalScores, setTotalScores] = useState<number[]>([]);
   const colors = ["Yellow", "White", "Green", "Blue", "Red"];
 
   const setRoundScores = (newRoundScores: number[]) => {
     setScores(
       scores.map((roundScores, i) =>
         i === round ? newRoundScores : roundScores
+      )
+    );
+    setTotalScores(
+      scores.reduce(
+        (acc, roundScores) => [
+          acc[0] + roundScores[0],
+          acc[1] + roundScores[1],
+        ],
+        [0, 0]
       )
     );
   };
@@ -28,6 +38,7 @@ function App() {
       [0, 0],
       [0, 0],
     ]);
+    setTotalScores([0, 0]);
   };
 
   useEffect(reset, []);
@@ -36,7 +47,7 @@ function App() {
     <>
       <h1>Lost Cities Scorer</h1>
 
-      <Scoreboard scores={scores} />
+      <Scoreboard scores={scores} totalScores={totalScores} />
 
       {round <= 2 ? (
         <RoundScore
@@ -46,7 +57,14 @@ function App() {
           incrementRound={incrementRound}
         />
       ) : (
-        <button onClick={reset}>Reset</button>
+        <>
+          <div>
+            {totalScores[0] === totalScores[1]
+              ? "It's a tie!"
+              : `Player ${totalScores[0] > totalScores[1] ? "1" : "2"} wins`}
+          </div>
+          <button onClick={reset}>Reset</button>
+        </>
       )}
     </>
   );
