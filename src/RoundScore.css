@@ -18,6 +18,10 @@
     column-gap: 1em;
 }
 
+.current-player-turn {
+    font-weight: bold;
+}
+
 .submit {
     display: grid;
 }

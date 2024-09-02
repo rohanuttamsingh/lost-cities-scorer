@@ -1,12 +1,12 @@
 import { useState } from "react";
 import City from "./City";
-import { Player, Round } from "./shared_types";
+import { Color, Player, Round } from "./shared_types";
 import "./RoundScore.css";
 
 type RoundProps = {
   players: string[];
   round: Round;
-  colors: Array<string>;
+  colors: Color[];
   setRoundScores: (newRoundScores: number[]) => void;
   incrementRound: () => void;
 };
@@ -45,7 +45,7 @@ export default function RoundScore({
         {colors.map((color) => (
           <City
             round={round}
-            key={color}
+            key={color.name}
             color={color}
             updateScores={(scoreDiff: number) => updateScores(0, scoreDiff)}
           />
@@ -59,17 +59,23 @@ export default function RoundScore({
         {colors.map((color) => (
           <City
             round={round}
-            key={color}
+            key={color.name}
             color={color}
             updateScores={(scoreDiff: number) => updateScores(1, scoreDiff)}
           />
         ))}
       </div>
       <div className="player-select">
-        <button onClick={() => setPlayer(0)}>
+        <button
+          onClick={() => setPlayer(0)}
+          className={player === 0 ? "current-player-turn" : ""}
+        >
           {players[0]}: {scores[0]}
         </button>
-        <button onClick={() => setPlayer(1)}>
+        <button
+          onClick={() => setPlayer(1)}
+          className={player === 1 ? "current-player-turn" : ""}
+        >
           {players[1]}: {scores[1]}
         </button>
       </div>

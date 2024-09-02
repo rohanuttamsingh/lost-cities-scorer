@@ -1,5 +1,17 @@
 button {
     margin-bottom: 0.25em;
+    border-radius: 3px;
+    border-width: 1px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
 }
 
 .city {
@@ -7,9 +19,5 @@ button {
 }
 
 .city-color {
-    font-weight: bold;
-}
-
-.played {
     font-weight: bold;
 }

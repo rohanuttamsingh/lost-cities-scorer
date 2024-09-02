@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RoundScore from "./RoundScore";
 import Scoreboard from "./Scoreboard";
 import Setup from "./Setup";
-import { Round } from "./shared_types";
+import { Color, Round } from "./shared_types";
 import "./App.css";
 
 function App() {
@@ -12,7 +12,14 @@ function App() {
   const [scores, setScores] = useState<number[][]>([]);
   const [totalScores, setTotalScores] = useState<number[]>([]);
 
-  const allColors = ["Yellow", "White", "Green", "Blue", "Red", "Purple"];
+  const allColors: Color[] = [
+    { name: "Yellow", hex: "#F4C430" },
+    { name: "White", hex: "#FFFAFA" },
+    { name: "Blue", hex: "#0077BE" },
+    { name: "Green", hex: "#228B22" },
+    { name: "Red", hex: "#B22222" },
+    { name: "Purple", hex: "#8A2BE2" },
+  ];
   const colors = expanded ? allColors : allColors.slice(0, -1);
 
   const setRoundScores = (newRoundScores: number[]) => {

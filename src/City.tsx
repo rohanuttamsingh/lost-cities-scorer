@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Color } from "./shared_types";
 import "./City.css";
 
 type Card = {
@@ -8,7 +9,7 @@ type Card = {
 
 type CityProps = {
   round: number;
-  color: string;
+  color: Color;
   updateScores: (scoreDiff: number) => void;
 };
 
@@ -59,17 +60,29 @@ export default function City({ round, color, updateScores }: CityProps) {
     }
   }, [cards, numHandshakes, score, updateScores]);
 
+  const playedStyle = {
+    backgroundColor: color.hex,
+  };
+
+  const unplayedStyle = {
+    borderColor: color.hex,
+    borderRadius: "3px",
+  };
+
   return (
     <div className="city">
-      <div className="city-color">{color}</div>
-      <button onClick={incrementHandshakes}>
+      <div className="city-color">{color.name}</div>
+      <button
+        onClick={incrementHandshakes}
+        style={numHandshakes === 0 ? unplayedStyle : playedStyle}
+      >
         {numHandshakes === 0 ? "_" : "H".repeat(numHandshakes)}
       </button>
       {cards.map((card, index) => (
         <button
           key={card.value}
           onClick={() => toggleCardPlayed(index)}
-          className={cards[index].played ? "played" : ""}
+          style={card.played ? playedStyle : unplayedStyle}
         >
           {card.value}
         </button>
